@@ -1,0 +1,237 @@
+/* ===== SubscribeSection.module.css (responsive & no mid-word breaks) ===== */
+
+.subscribe {
+  /* trims big empty areas on phones, roomy on desktop */
+  padding: clamp(36px, 7vw, 96px) clamp(12px, 3.6vw, 24px);
+  position: relative;
+  overflow: clip;
+  isolation: isolate;
+  background: linear-gradient(180deg, #f7fbff 0%, #eef6ff 60%, #eaf5ff 100%);
+
+}
+
+/* aurora blobs (kept, a bit softer on small screens) */
+.subscribe::before,
+.subscribe::after {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 520px;
+  pointer-events: none;
+  filter: blur(38px);
+  opacity: 0.5;
+  z-index: 0;
+  background: radial-gradient(
+      40% 50% at 18% 20%,
+      rgba(99, 227, 255, 0.45),
+      transparent 60%
+    ),
+    radial-gradient(
+      34% 46% at 82% 24%,
+      rgba(35, 211, 180, 0.35),
+      transparent 60%
+    );
+  animation: driftA 22s ease-in-out infinite alternate;
+}
+.subscribe::after {
+  inset: auto -15% -25% -15%;
+  background: radial-gradient(
+      46% 52% at 30% 60%,
+      rgba(122, 167, 255, 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      36% 44% at 70% 30%,
+      rgba(99, 227, 255, 0.28),
+      transparent 60%
+    );
+  animation: driftB 26s ease-in-out infinite alternate;
+}
+
+@keyframes driftA {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(0, -14px, 0) scale(1.02);
+  }
+}
+@keyframes driftB {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(0, 16px, 0) scale(1.03);
+  }
+}
+
+/* layout */
+.container {
+  position: relative;
+  z-index: 1;
+  /* Let Bootstrap's container-xl control max-width & gutters */
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ===== heading lines + letters ===== */
+.heading h2 {
+  margin: 0;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+
+  /* responsive sizing + balanced lines */
+  font-size: clamp(24px, 6vw, 54px);
+  line-height: clamp(1.18, 1.12, 1.12);
+  text-wrap: balance;
+  color: #0f1a34;
+}
+
+/* first line slightly softer */
+.heading h2 > div:first-child {
+  color: #2a4063;
+  font-weight: 800;
+}
+
+/* prevent breaks inside words; allow normal breaks between words */
+.line {
+  white-space: normal;
+}
+.word {
+  display: inline-block;
+  white-space: nowrap; /* <-- key to avoid "wi / th" */
+}
+.letter {
+  display: inline-block; /* keeps per-letter animation */
+}
+
+/* gradient text (with optional underline) */
+.doubleUnderline {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.22em;
+  background: linear-gradient(92deg, #1970a6, #63e3ff 45%, #23d3b4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.doubleUnderline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.1em;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #1970a6,
+    #63e3ff,
+    #23d3b4,
+    #63e3ff,
+    #1970a6
+  );
+  background-size: 200% 100%;
+  filter: drop-shadow(0 4px 10px rgba(99, 227, 255, 0.45));
+  animation: shine 3s linear infinite;
+}
+@keyframes shine {
+  to {
+    background-position: 200% 0;
+  }
+}
+
+/* remove underline for the specific span you marked */
+.noUnderline {
+  padding-bottom: 0;
+}
+.doubleUnderline.noUnderline::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* ===== CTA (responsive) ===== */
+.ctaButton {
+  margin-top: clamp(16px, 3.2vw, 24px);
+  position: relative; /* needed for sheen ::after */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Tighter base clamps so it shrinks sooner on small screens */
+  height: clamp(34px, 5.4vw, 48px);
+  width: auto;
+  padding: 0 clamp(14px, 4.4vw, 22px);
+  text-decoration: none;
+
+  font: 800 clamp(12.5px, 2.2vw, 16px) / 1 "DM Sans", system-ui, -apple-system,
+    "Segoe UI", Roboto, Arial, sans-serif;
+
+  border: 0;
+  border-radius: clamp(16px, 5vw, 28px);
+  color: #0a0f1a;
+  background: linear-gradient(135deg, #5eb0ff, #1fc1c3);
+  box-sizing: border-box;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+
+  box-shadow: 0 0 0 1px rgba(61, 124, 255, 0.2),
+    0 10px 32px rgba(61, 124, 255, 0.22);
+  transition: transform 0.14s ease, box-shadow 0.18s ease;
+}
+.ctaButton:hover {
+  transform: translateY(-1px);
+}
+.ctaButton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 18%,
+    transparent 36%,
+    transparent 64%,
+    rgba(255, 255, 255, 0.35) 82%,
+    transparent 100%
+  );
+  transform: translateX(-130%);
+  opacity: 0;
+  pointer-events: none;
+}
+.ctaButton:hover::after {
+  opacity: 1;
+  animation: sheen 1.2s ease both;
+}
+@keyframes sheen {
+  from {
+    transform: translateX(-130%);
+  }
+  to {
+    transform: translateX(130%);
+  }
+}
+.ctaButton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9),
+    0 0 0 6px rgba(61, 124, 255, 0.6);
+  transition: box-shadow 0.12s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ctaButton::after {
+    animation: none !important;
+    display: none;
+  }
+}
+
+
+
+
+
+
+
+

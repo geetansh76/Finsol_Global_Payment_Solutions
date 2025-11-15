@@ -1,0 +1,339 @@
+.heroTitle {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 6vw, 96px);
+  line-height: 1.15;
+  margin: 0 auto;
+  text-align: center;
+  min-width: 100%;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  text-wrap: balance;
+}
+
+.heroTitle .line {
+  display: inline-block;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.whiteLine { color: white; }
+
+.blueLine {
+  background: linear-gradient(90deg, #3d7cff 0%, #63e3ff 60%, #3d7cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ====================== SOLUTIONS SECTION ====================== */
+.solutionsSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: clamp(40px, 6vw, 80px) clamp(16px, 5vw, 40px);
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  flex-wrap: nowrap; /* no wrapping for left-right */
+  gap: clamp(24px, 4vw, 60px);
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Left Column */
+.leftColumn {
+  flex: 0 0 clamp(220px, 22vw, 300px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Vertical Tabs */
+.navList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.navList li {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 700;
+  color: #000;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 8px;
+  border-left: 4px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.navList li.active {
+  color: #008cff;
+  border-left: 4px solid #008cff;
+  background-color: #f0f7ff;
+}
+
+.navList li:hover {
+  background-color: #f5faff;
+}
+
+/* Right Column */
+.rightColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1440px;
+  position: relative;
+  margin-top: 20px;
+}
+
+/* Learn More Button Alignment */
+.learnMore {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.learnLink {
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  font: 800 20px/1 "DM Sans", system-ui, sans-serif;
+  text-decoration: none;
+  color: #008cff;
+  height: 40px;
+  padding: 10px 10px;
+  transition: transform 0.15s ease, box-shadow 0.25s ease, filter 0.15s ease;
+}
+
+.learnLink:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(15, 88, 182, 0.18);
+  filter: brightness(1.03);
+}
+
+/* Paragraphs */
+.paragraph {
+  color: var(--Black, #000);
+  font-size: clamp(14px, 2vw, 16px);
+  line-height: 1.8;
+  text-align: justify;
+  max-width: 100%;
+  margin: 0;
+  opacity: 0.95;
+  padding-left: 12px;
+  border-left: 4px solid #008cff; /* left-side border only */
+}
+
+.paragraph + .paragraph {
+  margin-top: 16px;
+  border-left: 4px solid #008cff;
+}
+
+/* ====================== PAYMENT SECTION ====================== */
+.paymentSection {
+  padding: clamp(40px, 6vw, 80px) clamp(16px, 5vw, 40px);
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.paymentContainer {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+/* Each category (Cards / QR / Bank) */
+.category {
+  margin-bottom: 32px;
+  padding-left: clamp(16px, 3vw, 17px);
+}
+
+.categoryTitle {
+  font-size: clamp(20px, 4vw, 34px);
+  font-weight: 700;
+  color: black;
+  margin-bottom: 12px;
+}
+
+.iconsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.iconsRow img {
+  width: clamp(100px, 28vw, 170px);
+  height: auto;
+  object-fit: contain;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.withVideoBg {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Default (desktop): video as background layer */
+.videoBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.videoEl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+}
+
+/* ====================== HERO / TITLES ====================== */
+.title,
+.heading {
+  font-size: clamp(28px, 5vw, 60px);
+  background: linear-gradient(
+    90deg,
+    #29236e 0%,
+    #3d7cff 35%,
+    #63e3ff 70%,
+    #29236e 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+/* ====================== RESPONSIVE ====================== */
+@media (max-width: 1024px) {
+  /* Keep your existing container/nav tweaks */
+  .container { flex-direction: column; }
+  .rightColumn { padding-left: 0; }
+  .learnMore { justify-content: flex-start; }
+  .navList li { font-size: clamp(16px, 4vw, 28px); }
+
+  /* TABLET & DOWN: put the video BELOW the payment content */
+  .withVideoBg {
+    display: flex;           /* switch from bg layer to stacked blocks */
+    flex-direction: column;
+    gap: 16px;
+    overflow: visible;       /* ensure rounded video shows fully */
+  }
+
+  .paymentContainer {
+    order: 1;                /* content first */
+    z-index: 1;
+  }
+
+  .videoBg {
+    position: static;        /* no absolute bg */
+    order: 2;                /* video after content */
+    width: 100%;
+    max-width: 100%;
+    height: 280px;           /* tablet height */
+    pointer-events: none;
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .videoEl {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: none;         /* remove any scaling */
+  }
+
+  .videoOverlay {
+    display: none;           /* no overlay needed when below content */
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .videoBg { height: 220px; }
+}
+
+/* SMALL PHONES */
+@media (max-width: 400px) {
+  .videoBg { height: 180px; border-radius: 10px; }
+}
+
+
+
+/* Show video on large screens only; hide it below laptop sizes */
+
+/* Laptop-and-below (≤1199px): remove the video entirely */
+@media (max-width: 1199px) {
+  .withVideoBg { 
+    overflow: visible;              /* keep section clean */
+  }
+  .videoBg { 
+    display: none !important;       /* hide the video container */
+  }
+  .videoEl { 
+    display: none !important;       /* hide actual <video> just in case */
+  }
+  .videoOverlay {
+    display: none !important;       /* no overlay when video is hidden */
+  }
+}
+
+/* (Optional) fine-tune spacing on smaller screens */
+@media (max-width: 1199px) {
+  .paymentSection { 
+    padding-top: clamp(24px, 5vw, 40px);
+    padding-bottom: clamp(24px, 5vw, 40px);
+  }
+  .paymentContainer { 
+    /* expands naturally when video is gone */
+    z-index: 1;
+  }
+}

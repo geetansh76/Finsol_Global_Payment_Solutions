@@ -1,0 +1,160 @@
+{
+  "meta": { "title": "Payins", "currency": "AUD" },
+
+  "lead": "Integrate secure, scalable APIs to accept payments globally with ease, giving developers full control to build seamless checkout flows and deliver frictionless customer experiences.",
+
+  "overview": "We provide an in-depth overview of the API, including its purpose, endpoints, authentication methods, data formats, and usage guidelines. You will have a comprehensive understanding of how to integrate and work with the API effectively, enabling you to harness its power for your specific use case.",
+
+  "prerequisites": [
+    "Merchant ID (mid)",
+    "Salt Key",
+    "Secret Key",
+    "Your server’s IP address must be allowlisted."
+  ],
+
+  "urls": {
+    "test": "https://spayout.finsol.group/",
+    "production": "https://payout.finsol.group"
+  },
+
+  "endpoints": [
+    { "path": "/v3/pay-request", "method": "POST", "description": "Initiate a payout to a beneficiary" },
+    { "path": "/v3/get-status", "method": "POST", "description": "Check the status of a specific transaction" }
+    
+  ],
+"parameters": [
+  {
+    "title": "Request Parameters",
+    "columns": ["Parameter","Data Type","Description","Min/Max Value","Required"],
+    "rows": [
+      { "Parameter": "amount",        "Data Type": "Number",        "Description": "Amount to be received from the payer",                                    "Min/Max Value": "3-10",  "Required": "Yes" },
+      { "Parameter": "currency",      "Data Type": "Character",     "Description": "Currency Code as per ISO 4217 standard",                                   "Min/Max Value": "3",     "Required": "Yes" },
+      { "Parameter": "pay_mode",      "Data Type": "Character",     "Description": "pay_mode refers to the method used for processing a payment",              "Min/Max Value": "2-4",   "Required": "Yes" },
+      { "Parameter": "sub_pay_mode",  "Data Type": "Character",     "Description": "It specifies the exact method used for the payment",                       "Min/Max Value": "2-4",   "Required": "Yes" },
+      { "Parameter": "merchant_id",   "Data Type": "Alpha Numeric", "Description": "A unique Id shared by Swipelocal",                                         "Min/Max Value": "15-18", "Required": "Yes" },
+      { "Parameter": "order_id",      "Data Type": "Alpha Numeric", "Description": "Merchant unique reference id Hyphen & underscore allowed",                  "Min/Max Value": "2-50",  "Required": "Yes" },
+      { "Parameter": "cust_name",     "Data Type": "Character",     "Description": "Name of the customer, only in English alphabets",                           "Min/Max Value": "2-50",  "Required": "Yes" },
+      { "Parameter": "cust_email",    "Data Type": "Email format",  "Description": "Customer Email",                                                             "Min/Max Value": "6-20",  "Required": "Yes" },
+      { "Parameter": "return_url",    "Data Type": "URL Format",    "Description": "Your return_url",                                                            "Min/Max Value": "6-50",  "Required": "Yes" },
+      { "Parameter": "cust_phone",    "Data Type": "Number",        "Description": "Customer phone number, with county code but without + sign",                 "Min/Max Value": "8-13",  "Required": "Yes" },
+      { "Parameter": "hash",          "Data Type": "Alpha Numeric", "Description": "SHA-256 results in a 64-character hash",                                     "Min/Max Value": "64",    "Required": "Yes" },
+      { "Parameter": "cust_country",  "Data Type": "Character",     "Description": "Customer country",                                                           "Min/Max Value": "3-30",  "Required": "Yes" },
+      { "Parameter": "remarks",       "Data Type": "Alpha Numeric", "Description": "Remarks for your reference",                                                 "Min/Max Value": "3-50",  "Required": "No"  },
+      { "Parameter": "udf1",          "Data Type": "String",        "Description": "Remarks for your reference",                                                 "Min/Max Value": "3-50",  "Required": "No"  },
+      { "Parameter": "udf2",          "Data Type": "String",        "Description": "Remarks for your reference",                                                 "Min/Max Value": "3-50",  "Required": "No"  },
+      { "Parameter": "udf3",          "Data Type": "String",        "Description": "Remarks for your reference",                                                 "Min/Max Value": "3-50",  "Required": "No"  },
+      { "Parameter": "udf4",          "Data Type": "String",        "Description": "Remarks for your reference",                                                 "Min/Max Value": "3-50",  "Required": "No"  },
+      { "Parameter": "udf5",          "Data Type": "String",        "Description": "Remarks for your reference",                                                 "Min/Max Value": "3-50",  "Required": "No"  },
+      { "Parameter": "udf6",          "Data Type": "String",        "Description": "Remarks for your reference",                                                 "Min/Max Value": "3-50",  "Required": "No"  },
+      { "Parameter": "udf7",          "Data Type": "String",        "Description": "Remarks for your reference",                                                 "Min/Max Value": "3-50",  "Required": "No"  }
+    ]
+  }
+  ],
+
+
+
+  "payments": {
+    "encryption": {
+      "heading": "Encryption & Decryption",
+      "lead": "All sensitive data in requests and responses must be encrypted/decrypted using AES-256-CBC.",
+      "steps": ["Create a Request Object: Form a JSON object with the required parameters (e.g., for /v3/pay-request)."],
+      "requestExampleJson": {
+        "amount": "10.00",
+        "currency": "AUD",
+        "order_id": "8783193",
+        "pay_mode": "AUAT",
+        "sub_pay_mode": "BSB",
+        "merchant_id": "UMZ0VEHTT03DH",
+        "beneficiary": {
+          "bank_acc_no": "083028",
+          "name": "TestTest",
+          "email": "test@test.com",
+          "mobile": "610430467999",
+          "address": "55street99",
+          "city": "SouthManhaten",
+          "pincode": "1234",
+          "bsb": "987654321",
+          "state": "MyState",
+          "country": "AUS"
+        }
+      },
+      "stringifyExample": "encrypt_str={\"amount\":\"10.00\"~\"currency\":\"AUD\"~\"order_id\":\"8783193\"~\"pay_mode\":\"AUAT\"~\"sub_pay_mode\":\"BSB\"~\"merchant_id\":\"UMZ0VEHTT03DH\"~\"beneficiary\":{ \"bank_acc_no\":\"083028\",\"name\":\"Test Test\",\"email\":\"test@test.com\",\"mobile\":\"610430467999\",\"address\":\"55 street 99\",\"city\":\"South Manhaten\",\"pincode\":\"1234\",\"bsb\":\"987654321\",\"state\":\"My State\",\"country\":\"AUS\"}}",
+      "opensslExampleEncrypt": "openssl enc -aes-256-cbc -in plaintext.txt -out encrypted_data.bin -K [YOUR_32_CHAR_KEY] -iv [YOUR_16_CHAR_IV]",
+      "finalRequestJson": { "mid": "iA************zo", "data": "FEZQmxMXriEFA5Og..." },
+      "exampleJson": { "mid": "iA************zo", "data": "fMrCfhtikCMj5SY3+HyH..." },
+      "decryptNotes": [
+        "IV: first 16 chars of Secret Key",
+        "Key: next 32 chars of Secret Key",
+        "Decrypt with AES-256-CBC"
+      ],
+      "opensslExampleDecrypt": "openssl enc -d -aes-256-cbc -in encrypted_data.txt -out decrypted_data.txt -K <key> -iv <iv>"
+    },
+
+
+
+
+    
+    "initiatePayout": {
+      "title": "Initiate a Payout (/v3/pay-request)",
+      "steps": [
+        "Create the Beneficiary Object",
+        "Follow the Encryption Steps (3.1) to encrypt this entire JSON object.",
+        "Send the encrypted payload in a POST request to {baseUrl}/v3/pay-request."
+      ],
+      "sampleDecryptedResponseJson": {
+        "status": "Success",
+        "data": {
+          "status": "Accepted",
+          "status_code": "0000",
+          "amount": "19.66",
+          "txn_id": "UA24/3232583M-00165",
+          "merchant_id": "UM207EHIT23FAH",
+          "order_id": "6785183",
+          "remarks": "Request Accepted"
+        }
+      }
+    },
+
+    "checkBalance": {
+      "title": "Check Balance (/v3/get-balance)",
+      "examples": [
+        { "label": "Encrypt the below request", "json": { "salt": "9ZRoJDkqzS6oLg5GqhfP2TamQgb2wbs" } },
+        { "label": "Create Request Object", "json": { "mid": "UM********6LT", "data": "KdmMZgUz...Qx" } },
+        { "label": "Hash", "json": { "mid": "is3V68VJ5F8IR", "txn_id": "UA25032801041423", "hash": "48DJ2D9JSTDF06PFJDSJ49..." } }
+      ],
+      "responseJson": {
+        "status": "Success",
+        "remarks": "Success",
+        "data": { "currencyCode": "AUD", "amount": "9800.0", "hash": "57043740..." }
+      }
+    },
+
+    "checkStatus": {
+      "title": "Check Transaction Status (/v3/get-status)",
+      "requestJson": { "salt": "YOUR_SALT_KEY", "txn_id": "FINSOL_TRANSACTION_ID_TO_QUERY" },
+      "responseJson": {
+        "status": "Failed",
+        "status_code": "4444",
+        "amount": "746",
+        "txn_id": "LA25032712562246IB77",
+        "order_id": "ORD-250327125550-660DIA",
+        "remarks": "Failed at Bank End",
+        "hash": "08481354..."
+      }
+    }
+  },
+
+  "appendix": {
+    "paymentMethods": [
+      { "currency": "AUD", "method": "BSB", "paymode": "AUAT", "subpaymode": "BSB" }
+    ],
+    "statusCodes": [
+      { "Status Name": "Accepted", "Status Code": "0000", "Remarks": "Request Accepted" },
+      { "Status Name": "Success",  "Status Code": "1111", "Remarks": "Payment Successful" },
+      { "Status Name": "Pending",  "Status Code": "2222", "Remarks": "Payment Under Processing" },
+      { "Status Name": "Rejected", "Status Code": "3333", "Remarks": "Request Rejected" },
+      { "Status Name": "Failed",   "Status Code": "4444", "Remarks": "Failed at Bank End" },
+      { "Status Name": "Reversed", "Status Code": "1010", "Remarks": "Payment Reversed" }
+    ]
+  }
+}

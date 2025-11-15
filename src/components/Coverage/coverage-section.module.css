@@ -1,0 +1,336 @@
+/* ===== keep your originals ===== */
+.coverageHero {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  padding-top: 48px;
+  padding-bottom: 24px;
+}
+
+.coverageTitle {
+  display: block;
+  font-size: clamp(40px, 7vw, 96px);
+  line-height: 1.1;
+  font-weight: 800;
+  margin: 0 auto 16px;
+}
+
+.whiteText {
+  color: #ffffff;
+}
+
+.blueText {
+  background: linear-gradient(90deg, #3d7cff 0%, #63e3ff 60%, #3d7cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background-size: 200% 100%;
+  transition: background-position 0.6s ease;
+}
+.blueText:hover {
+  background-position: 100% 0;
+}
+
+.coverageDescription {
+  margin: 0 auto;
+  max-width: 70ch;
+  opacity: 0.9;
+  line-height: 1.6;
+  font-size: clamp(14px, 1.8vw, 18px);
+  text-align: center;
+  padding: 0 16px;
+}
+
+.coverageSection {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 100px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+
+.header {
+  text-align: center;
+}
+
+.header h2 {
+  font-size: 60px;
+  font-weight: 700;
+  color: var(--Blue, #29236e);
+  font-family: "DM Sans";
+  font-style: normal;
+  line-height: normal;
+  background: linear-gradient(
+    90deg,
+    #1b2a5b 0%,
+    #3d7cff 45%,
+    #63e3ff 70%,
+    #1b2a5b 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 0.6s ease;
+}
+
+/* ✅ width fixed to be fluid on small screens */
+.header p {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 850px; /* was width: 850px; */
+  width: 100%;
+  color: black;
+  text-align: center;
+  font-family: "DM Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+/* ===== rows ===== */
+.firstRow {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  gap: 80px;
+}
+
+/* make this fluid too */
+.secondRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 80px;
+  width: 100%;
+  max-width: 1200px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.continentBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  gap: 20px;
+}
+
+.continentBlock h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-align: center;
+  width: 100%;
+}
+
+.countryList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.twoColumnList .countryList {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.countryButton {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 153px;
+  height: 50px;
+  padding: 10px 16px;
+  border: 1px solid #cce6ff;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 14px;
+  color: #1e1e1e;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.countryButton:hover {
+  background: #eef6ff;
+  border-color: #00aeef;
+}
+.countryButton img {
+  vertical-align: middle;
+}
+
+.mapWrapper {
+  height: 100%;
+  width: 100%;
+}
+
+/* ============================= */
+/*   RESPONSIVE TWEAKS ONLY      */
+/* ============================= */
+
+/* Large tablets (≤1200px): relax gaps a bit */
+@media (max-width: 1200px) {
+  .secondRow {
+    gap: 48px;
+  }
+  .firstRow {
+    gap: 48px;
+  }
+  .header h2 {
+    font-size: 52px;
+  }
+}
+
+/* Medium tablets (≤992px): scale type and make rows more fluid */
+@media (max-width: 992px) {
+  .coverageSection {
+    padding: 72px 0;
+    gap: 40px;
+  }
+  .header h2 {
+    font-size: 44px;
+  }
+  .header p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* Two blocks side-by-side when available; stacks if only one */
+  .firstRow {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+    max-width: 100%;
+  }
+  .secondRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  .continentBlock {
+    width: 100%;
+  }
+  .countryList {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Tablets & large phones (≤768px): stack, smaller heading, 2-col countries */
+@media (max-width: 768px) {
+  .coverageHero {
+    min-height: 420px;
+  }
+  .coverageTitle {
+    font-size: 40px;
+    padding-inline: 16px;
+  }
+
+  .coverageSection {
+    padding: 48px 0;
+    gap: 32px;
+  }
+
+  .header h2 {
+    font-size: 32px;
+    line-height: 1.25;
+  }
+  .header p {
+    max-width: 700px;
+    padding-inline: 16px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .firstRow {
+    grid-template-columns: 1fr; /* stack Asia/Europe */
+    gap: 24px;
+  }
+  .secondRow {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .continentBlock {
+    padding: 0 8px;
+  }
+  .continentBlock h3 {
+    font-size: 20px;
+  }
+
+  .countryList,
+  .twoColumnList .countryList {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .countryButton {
+    width: 100%;
+    height: auto;
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 14px;
+    white-space: normal;
+  }
+}
+
+/* Phones (≤480px): stack rows, 2 narrow columns for countries */
+@media (max-width: 480px) {
+  .coverageHero {
+    min-height: 360px;
+  }
+  .coverageTitle {
+    font-size: 28px;
+  }
+  .header h2 {
+    font-size: 24px;
+  }
+  .header p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .secondRow {
+    grid-template-columns: 1fr;
+  }
+
+  /* Use CSS multicol so buttons flow nicely in two columns */
+  .countryList {
+    display: block; /* override grid here only */
+    column-count: 2;
+    column-gap: 12px;
+  }
+  .twoColumnList .countryList {
+    column-count: 2;
+  }
+
+  .countryButton {
+    display: block;
+    width: 100%;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    margin-bottom: 8px;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
+
+/* Small phones (≤375px) */
+@media (max-width: 375px) {
+  .coverageTitle {
+    font-size: 24px;
+  }
+  .countryList {
+    column-gap: 10px;
+  }
+  .countryButton {
+    font-size: 12.5px;
+  }
+}

@@ -1,0 +1,184 @@
+/* ===== Page shell ===== */
+.wrap {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 3vw, 32px);
+  background: linear-gradient(135deg, #0b1020 0%, #0b0f1a 60%, #0a0e18 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Soft gradient glow behind the card */
+.backGlow {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(55% 55% at 30% 30%, rgba(106,95,253,0.35) 0%, transparent 60%),
+    radial-gradient(55% 55% at 70% 70%, rgba(0,192,255,0.35) 0%, transparent 60%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+/* ===== Card ===== */
+.card {
+  width: min(880px, 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* border: 1px solid rgba(255,255,255,0.10); */
+  border-radius: 20px;
+  padding: clamp(20px, 4vw, 40px);
+  text-align: center;
+  color: #e9eef8;
+  /* box-shadow:
+    0 20px 60px rgba(0,0,0,0.35),
+    0 0 0 1px rgba(255,255,255,0.06) inset; */
+}
+
+/* ===== Illustration ===== */
+.illustration {
+  display: grid;
+  place-items: center;
+  margin-bottom: clamp(8px, 1.8vw, 14px);
+}
+.svg {
+  width: clamp(180px, 30vw, 340px);
+  height: auto;
+  display: block;
+}
+.svgText {
+  font: 800 clamp(42px, 8vw, 84px)/1 "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  letter-spacing: 1px;
+  paint-order: stroke;
+  stroke: rgba(0,0,0,0.25);
+  stroke-width: 2px;
+}
+
+/* ===== Text ===== */
+.title {
+  font: 800 clamp(22px, 3.6vw, 40px)/1.15 "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  margin: 6px 0 8px;
+  color: #ffffff;
+}
+.lead {
+  margin: 0 auto;
+  color: #cfd8ea;
+  max-width: 56ch;
+  font-size: clamp(14px, 1.6vw, 16px);
+  line-height: 1.7;
+}
+
+/* ===== Actions ===== */
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: clamp(14px, 3vw, 24px) 0 8px;
+}
+
+.btn {
+  --radius: 999px;
+  --padY: 12px;
+  --padX: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padY) var(--padX);
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .16s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+  user-select: none;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+.btnPrimary {
+  color: #fff;
+  background: linear-gradient(135deg, #6a5ffd 0%, #00c0ff 100%);
+  box-shadow:
+    0 0 0 1px rgba(61,124,255,0.15),
+    0 12px 28px rgba(61,124,255,0.28);
+}
+.btnPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px rgba(61,124,255,0.25),
+    0 16px 36px rgba(61,124,255,0.35);
+}
+
+.btnGhost {
+  color: #e9eef8;
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.16);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08) inset;
+}
+.btnGhost:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.10);
+}
+
+/* Small helper line */
+.tips {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #b9c4da;
+}
+.tips span {
+  font-weight: 700;
+  color: #d7e2f8;
+}
+
+/* ===== Accessibility / Motion safety ===== */
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none !important; }
+}
+
+/* ===== Responsive tweaks ===== */
+@media (max-width: 480px) {
+  .btn { width: 100%; }
+}
+
+
+
+
+
+
+/* ===== Professional 404 headline ===== */
+.heroWrap {
+  display: grid;
+  place-items: center;
+  margin-bottom: clamp(10px, 2.2vw, 18px);
+}
+
+.hero404 {
+  font: 900 clamp(72px, 14vw, 160px)/0.9 "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  letter-spacing: -2px;
+  /* Finsol gradient text */
+  background: linear-gradient(135deg, #6a5ffd 0%, #00c0ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Subtle depth without looking playful */
+  text-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Thin accent rule under the 404 */
+.heroRule {
+  width: min(280px, 55%);
+  height: 3px;
+  margin-top: clamp(8px, 1.6vw, 12px);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(106,95,253,0.8), rgba(0,192,255,0.8));
+  box-shadow:
+    0 6px 18px rgba(61,124,255,0.35),
+    0 0 0 1px rgba(61,124,255,0.18);
+}

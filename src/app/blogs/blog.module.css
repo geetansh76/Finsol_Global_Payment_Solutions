@@ -1,0 +1,49 @@
+
+.Header {
+  padding: 4rem 2rem 2rem;
+  text-align: center;
+  
+}
+.Title {
+  display: inline-block;
+  margin: 0 0 72px;
+  font-weight: 800;
+}
+.titlePrimary{
+  display: inline-block;
+  color: #fff !important;
+  text-align: center;
+  font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  font-size: clamp(42px, 6.5vw, 96px);
+  line-height: clamp(46px, 6.8vw, 100px);
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+.titleAccent{
+  display: inline-block;
+  font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  font-size: clamp(42px, 6.5vw, 96px);
+  line-height: clamp(46px, 6.8vw, 100px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #3d7cff 0%, #63e3ff 60%, #3d7cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 18px rgba(61, 124, 255, 0.25));
+}
+
+.descriptionOverride {
+  max-width: 900px;
+  margin: 10px auto 0;
+  font-size: clamp(14px, 1.8vw, 18px);
+  line-height: 1.6;
+  color: #ffffff;
+  font-weight: 600;
+  opacity: 0.95;
+  text-align: center;
+  padding: 0 16px;
+}

@@ -1,0 +1,361 @@
+/* SharedPage.module.css */
+
+/* ----- HERO TITLE (kept but fluid) ----- */
+.shortHero {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.customTitle {
+  /* was fixed width/height; now fluid with clamp */
+  width: min(1200px, 94vw);
+  margin: -30px auto 0 !important;
+  text-align: center;
+  font-family: "DM Sans";
+  font-size: clamp(28px, 7vw, 96px);
+  font-weight: 700;
+  line-height: clamp(34px, 8vw, 100px);
+  letter-spacing: 0;
+  background: linear-gradient(90deg, #3d7cff 0%, #63e3ff 60%, #3d7cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: block;
+}
+
+/* ===== Generic helpers ===== */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ===== Intro section ===== */
+.categoryContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: clamp(40px, 8vw, 100px) 0;
+  background: #fff;
+}
+
+.contentCTA {
+  display: grid;
+  grid-template-columns: 1fr 1fr;           /* 2 columns on wide screens */
+  align-items: center;
+  gap: clamp(20px, 4vw, 40px);
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 clamp(16px, 6vw, 100px);
+  box-sizing: border-box;
+}
+
+.headerBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(16px, 2.4vw, 30px);
+  width: 100%;
+  max-width: 680px;                          /* was rigid 600px */
+}
+
+.categoryDescription {
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(15px, 1.6vw, 16px);
+  font-weight: 600;
+  line-height: clamp(24px, 3.2vw, 30px);
+  color: #000;
+  opacity: 0.75;
+  text-align: justify;
+  margin: 0;
+  max-width: 72ch;
+}
+
+/* image wrapper to manage order on small screens */
+.categoryImageWrap {
+  width: 100%;
+}
+
+.categoryImage {
+  display: block;
+  width: min(560px, 100%);
+  height: auto;                              /* <- stop squashing */
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.16);
+  margin: 0 auto;                            /* nicely centered on small */
+}
+
+/* ===== Benefits ===== */
+.benefitsSection {
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 clamp(16px, 5.5vw, 80px);
+  margin: 0 auto clamp(60px, 8vw, 100px);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.benefitsTitle {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 900;
+  font-family: "DM Sans", sans-serif;
+  text-align: center;
+  background: linear-gradient(90deg, #0d1b3d 0%, #103a73 35%, #185ab0 65%, #0b8a86 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% 100%;
+  animation: gradientShift 6s linear infinite;
+  text-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.benefitsSubtitle {
+  font-size: clamp(14px, 2.3vw, 18px);
+  font-weight: 500;
+  text-align: center;
+  max-width: 850px;
+  color: #4a4a4a;
+  font-family: "DM Sans", sans-serif;
+}
+
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  width: 100%;
+  max-width: 1200px;
+}
+
+.benefitCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  padding: clamp(18px, 2.2vw, 26px) clamp(16px, 2vw, 22px);
+  text-align: center;
+  border: 1px solid transparent;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.5)) padding-box,
+              linear-gradient(135deg, rgba(61, 124, 255, 0.35), rgba(99, 227, 255, 0.35)) border-box;
+  box-shadow: 0 18px 36px rgba(10, 21, 40, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.benefitCard::before {
+  content: "";
+  position: absolute;
+  inset: -30% -30% auto -30%;
+  height: 160px;
+  filter: blur(40px);
+  opacity: 0.35;
+  pointer-events: none;
+  background: radial-gradient(60% 60% at 50% 50%, rgba(99, 227, 255, 0.6), rgba(99, 227, 255, 0));
+  transform: translateY(40px);
+  transition: transform 0.45s ease, opacity 0.45s ease;
+}
+.benefitCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 56px rgba(10, 21, 40, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+.benefitCard:hover::before { transform: translateY(0); opacity: 0.55; }
+
+.benefitCard img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 14px rgba(61, 124, 255, 0.18));
+  display: block;
+  margin: 0 auto 8px;
+}
+
+.benefitCard h4 {
+  font-size: clamp(16px, 2.2vw, 20px);
+  font-weight: 800;
+  margin: 8px 0 4px;
+  background: linear-gradient(90deg, #2a66d6 0%, #3d7cff 35%, #63e3ff 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.benefitCard p {
+  font-size: clamp(14px, 1.9vw, 15px);
+  font-weight: 600;
+  line-height: clamp(22px, 3.4vw, 24px);
+  color: #29415b;
+  margin: 0;
+}
+
+/* ===== How Card Transactions Work ===== */
+.cardTransactionSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: clamp(32px, 6vw, 80px);
+  gap: clamp(24px, 6vw, 80px);
+  background-color: #fff;
+}
+
+.cardTransactionImageWrapper {
+  position: relative;
+  min-width: 0; /* allow grid shrink */
+}
+
+.cardTransactionImage {
+  position: sticky;
+  top: 100px;
+  width: min(560px, 100%);
+  height: 600px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 30px 60px rgba(10, 21, 40, 0.18);
+}
+
+.cardTransactionContent {
+  min-width: 0;
+}
+
+.cardTransactionHeading {
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(24px, 4.2vw, 44px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin: -8px 0 16px;
+  background: linear-gradient(90deg, #0d1b3d 0%, #103a73 35%, #185ab0 65%, #0b8a86 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% 100%;
+  animation: gradientShift 7s linear infinite;
+  position: relative;
+  text-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+.cardTransactionHeading::after {
+  content: "";
+  display: block;
+  height: 4px;
+  margin-top: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #103a73, #185ab0, #0b8a86);
+  box-shadow: 0 8px 18px rgba(16, 58, 115, 0.35);
+}
+
+.cardTransactionDescription {
+  color: #0e2438;
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(14px, 1.8vw, 15px);
+  font-weight: 600;
+  line-height: clamp(22px, 3.6vw, 26px);
+  opacity: 0.86;
+  margin-bottom: 24px;
+  max-width: 72ch;
+  text-align: justify;
+}
+
+.cardStep {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 18px 18px 22px;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.65));
+  border: 1px solid rgba(122, 167, 255, 0.35);
+  box-shadow: 0 14px 28px rgba(10, 21, 40, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.cardStep::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #3d7cff, #63e3ff, #23d3b4);
+  box-shadow: 0 6px 16px rgba(99, 227, 255, 0.35);
+}
+.cardStep:hover { transform: translateX(4px); box-shadow: 0 18px 36px rgba(10, 21, 40, 0.14); border-color: rgba(122, 167, 255, 0.55); }
+
+.cardStepNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  flex: 0 0 44px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #0b1530;
+  background: radial-gradient(140% 140% at 0% 0%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 60%),
+              linear-gradient(135deg, #7aa7ff, #63e3ff 60%, #23d3b4);
+  box-shadow: 0 10px 20px rgba(61, 124, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.cardStepTitle1,
+.cardStepTitle2,
+.cardStepTitle3 {
+  font-size: clamp(17px, 2.2vw, 22px);
+  font-weight: 800;
+  margin: 0 0 6px;
+  background: linear-gradient(90deg, #2a66d6 0%, #3d7cff 35%, #63e3ff 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.3;
+}
+
+.cardStepText {
+  color: #29415b;
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(14px, 2vw, 16px);
+  font-weight: 600;
+  line-height: clamp(22px, 3.8vw, 28px);
+  opacity: 0.9;
+  max-width: 72ch;
+}
+
+/* ===== Responsive breakpoints ===== */
+
+/* collapse intro split to single column on tablets/phones */
+@media (max-width: 1024px) {
+  .contentCTA {
+    grid-template-columns: 1fr;
+  }
+  .categoryImageWrap {
+    order: -1;                 /* show image first on small screens */
+  }
+  .cardTransactionSection {
+    grid-template-columns: 1fr;
+  }
+  .cardTransactionImage {
+    position: static;          /* disable sticky on small viewports */
+    margin-bottom: 16px;
+  }
+}
+
+/* 2-up benefits on medium screens */
+@media (max-width: 1200px) {
+  .cardList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* phone optimizations */
+@media (max-width: 640px) {
+  .benefitsSection {
+    padding: 0 16px;
+    gap: 32px;
+  }
+  .cardList {
+    grid-template-columns: 1fr;
+  }
+}

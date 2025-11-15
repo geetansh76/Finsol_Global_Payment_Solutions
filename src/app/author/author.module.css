@@ -1,0 +1,115 @@
+/* ===== Author header (scoped) ===== */
+.authorHeader{
+ 
+  padding-block: 28px;
+  min-height: 720px;
+  display: grid;
+  place-items: center;
+
+  background: linear-gradient(180deg, #F6F7FF 0%, #FFFFFF 70%);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Hide any subtext/buttons that Header could include */
+.authorHeader :where(p,.desc,.subtitle,[data-desc],[data-subtitle],.actions,button,a[role="button"]){
+  display: none !important;
+}
+
+/* Title */
+.authorTitle{
+  margin: 0;
+  text-align: center;
+  font-weight: 900;
+  line-height: 1.1;
+  font-size: 96px;
+  letter-spacing: 0.2px;
+      background: linear-gradient(90deg, #3d7cff 0%, #63e3ff 60%, #3d7cff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline;
+}
+
+
+
+
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 560px; /* text grows, image fixed */
+  column-gap: 40px;
+  align-items: center;
+  padding: 0 24px;
+  max-width: 1300px;
+  margin: 100px auto 100px;
+}
+
+/* Left column */
+.aboutText {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+  max-width: 600px;
+  height: 500px;
+}
+
+/* Heading + copy */
+.aboutTitle {
+  margin: 0 0 10px;
+  font-family: "DM Sans";
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 1.1;
+
+      background: linear-gradient(90deg, #0d1b3d 0%, #103a73 35%, #185ab0 65%, #0b8a86 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.aboutP {
+  margin: 0 0 12px;
+  color: #070707;
+  text-align: justify;
+  opacity: 0.7;
+  font-family: "DM Sans";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+/* Right column image */
+.aboutMedia {
+  margin: 0;
+}
+
+.aboutImg {
+  width: 600px; /* fill the 560px column */
+  height: 495px; /* keep aspect ratio */
+  display: block;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Kill any title animations on this page */
+.authorHeader,
+.authorHeader * {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .about {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 16px;
+  }
+  .aboutMedia {
+    order: -1;
+  } /* image on top */
+}

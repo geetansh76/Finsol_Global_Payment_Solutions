@@ -1,0 +1,237 @@
+/* Scope tokens to this section (CSS Modules safe) */
+.statsSection {
+  --navy: #29236e;
+  --blue: #1a70a6;
+  --cyan: #5be1ff;
+  --bg: #f6f8ff;
+
+  position: relative;
+  width: 100%;
+  padding: clamp(40px, 5vw, 80px) clamp(16px, 3vw, 24px) clamp(56px, 6vw, 96px);
+  background: var(--bg);
+  text-align: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* header */
+.heading {
+  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 56px);
+  margin: 0 0 clamp(8px, 1.2vw, 12px);
+  background: linear-gradient(90deg, #1b2a5b 22%, #3d7cff 30%, #63e3ff 70%, #1b2a5b 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 0.6s ease;
+}
+
+.subtext {
+  margin: 0 auto clamp(20px, 4vw, 38px);
+  max-width: min(84ch, 92vw);
+  color: var(--blue);
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(14px, 1.6vw, 16px);
+  font-weight: 600;
+  line-height: clamp(22px, 3.6vw, 30px);
+}
+
+/* subtle base band (keep if you add bg later) */
+.splitBg {
+  position: absolute;
+  left: -5vw;
+  right: -5vw;
+  bottom: 0;
+  height: clamp(22%, 34%, 40%);
+  opacity: 0.8;
+  z-index: 0;
+}
+
+/* grid – auto responsive columns */
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(14px, 2vw, 28px);
+  max-width: min(1200px, 96vw);
+  margin: 0 auto;
+}
+
+/* card */
+.card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 20px;
+  padding: clamp(18px, 2.4vw, 26px) clamp(14px, 2vw, 20px) clamp(16px, 2vw, 22px);
+
+  background:
+    radial-gradient(120% 120% at 80% 0%, rgba(91, 225, 255, 0.10), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #f7faff 35%, #f1f6ff 100%);
+
+  box-shadow: 5px 10px 10px rgba(23, 38, 68, 0.14), inset 0 5px 10px rgba(255, 255, 255, 0.7);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  min-height: clamp(220px, 28vw, 280px); /* keeps cards even without being huge on phones */
+}
+
+.card:hover {
+  box-shadow: 0 20px 44px rgba(23, 38, 68, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* entrance halo */
+.cardActive::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: radial-gradient(60% 60% at 50% 0%, rgba(91, 225, 255, 0.35), transparent 70%);
+  filter: blur(22px);
+  opacity: 0.35;
+  z-index: -1;
+  animation: halo 1.6s ease-out forwards;
+}
+@keyframes halo { from { opacity: 0.45; } to { opacity: 0; } }
+
+/* ===== Animated ring ===== */
+.circle {
+  --size: clamp(88px, 10vw, 128px);
+  --thickness: clamp(8px, 1.1vw, 12px);
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  margin-bottom: clamp(8px, 1vw, 12px);
+}
+
+.circle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(from var(--angle, 0deg), #5be1ff, #1a70a6, #6aa7ff, #5be1ff);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--thickness)), #000 0);
+  mask: radial-gradient(farthest-side, transparent calc(100% - var(--thickness)), #000 0);
+  box-shadow: 0 0 0 6px rgba(26, 112, 166, 0.08);
+}
+
+.circle::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: inherit;
+  background: radial-gradient(90% 90% at 50% 30%, rgba(26, 112, 166, 0.08), rgba(41, 35, 110, 0.04), transparent 70%);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.circlePlay::before { animation: ringSpin 7s linear infinite; }
+@keyframes ringSpin { to { --angle: 360deg; } }
+
+/* orbiting dot */
+.orbit {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  transform-origin: 50% 50%;
+  animation: orbit 4.5s linear infinite;
+}
+.dot {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(6px, 0.8vw, 8px);
+  height: clamp(6px, 0.8vw, 8px);
+  border-radius: 999px;
+  background: radial-gradient(circle, #fff 0%, #c8f3ff 60%, rgba(91, 225, 255, 0.4) 100%);
+  box-shadow: 0 0 10px rgba(91, 225, 255, 0.75);
+}
+@keyframes orbit { to { transform: rotate(360deg); } }
+
+/* inner disc + number */
+.circleInner {
+  position: absolute;
+  inset: clamp(6px, 0.8vw, 10px);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  box-shadow: inset 0 6px 18px rgba(26, 112, 166, 0.08), 0 8px 20px rgba(26, 112, 166, 0.1);
+  z-index: 1;
+}
+
+.metric {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(26px, 3.2vw, 40px);
+  font-weight: 900;
+  color: #0e6aa7;
+  letter-spacing: 0.2px;
+}
+
+/* label */
+.label {
+  margin: clamp(4px, 0.6vw, 6px) 0 0;
+  font-size: clamp(13px, 1.4vw, 15px);
+  font-weight: 700;
+  color: #2c3450;
+}
+
+/* ====== Responsive refinements by width ====== */
+
+/* large tablets / small laptops: prefer 3 columns if space allows */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+}
+
+/* tablets */
+@media (max-width: 900px) {
+  .subtext { max-width: 70ch; }
+  .card { min-height: clamp(210px, 30vw, 260px); }
+}
+
+/* big phones / small tablets (portrait) */
+@media (max-width: 680px) {
+  .statsSection { padding: clamp(32px, 7vw, 40px) 16px clamp(44px, 8vw, 56px); }
+  .subtext { max-width: 64ch; }
+  .card { min-height: unset; }
+}
+
+/* common phones */
+@media (max-width: 480px) {
+  .grid { gap: 14px; }
+  .subtext { max-width: 60ch; }
+}
+
+/* very small phones */
+@media (max-width: 360px) {
+  .grid { gap: 12px; }
+  .label { font-size: 13px; }
+}
+
+
+@media (max-width: 360px) {
+  .statsSection { padding-left: 12px; padding-right: 12px; }
+}
+
+
+/* motion-safe */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .cardActive::after,
+  .circle::before,
+  .orbit {
+    animation: none !important;
+    transition: none !important;
+  }
+}

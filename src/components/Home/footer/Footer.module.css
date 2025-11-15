@@ -1,0 +1,255 @@
+/* -------- Base & layout -------- */
+.footer {
+  position: relative;
+  overflow: hidden;
+  color: #e7efff;
+  padding: 96px 28px 40px;
+  isolation: isolate;
+}
+
+/* Keep this as a non-layout wrapper (Bootstrap handles the grid now) */
+.container {
+  width: min(1440px, 100vw);
+  margin: 0 auto;
+  /* remove grid; Bootstrap .row/.col handle layout */
+}
+
+/* -------- Background -------- */
+.bgBase {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      120% 100% at 10% -10%,
+      rgba(26, 112, 166, 0.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      100% 120% at 90% 10%,
+      rgba(41, 35, 110, 0.18),
+      transparent 45%
+    ),
+    linear-gradient(180deg, #0b0f1a 0%, #0d1220 60%, #0a0f1a 100%);
+  z-index: -3;
+}
+.auroraA,
+.auroraB {
+  position: absolute;
+  inset: 0;
+  filter: blur(44px);
+  opacity: 0.35;
+  z-index: -2;
+  mix-blend-mode: screen;
+}
+.auroraA {
+  background: radial-gradient(40% 45% at 20% 30%, #1a70a6, transparent 60%);
+}
+.auroraB {
+  background: radial-gradient(38% 48% at 80% 20%, #6ea8ff, transparent 60%);
+}
+.noise {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>");
+  pointer-events: none;
+}
+.topWave {
+  position: absolute;
+  left: 50%;
+  top: -26px;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 48px;
+  background: radial-gradient(
+    120% 60% at 50% 100%,
+    rgba(255, 255, 255, 0.08),
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* -------- Left block -------- */
+.left {
+  max-width: 460px;
+}
+.blurb {
+  margin: 16px 0 18px;
+  color: #cfe5ff;
+  font: 500 15.5px/1.7 "DM Sans", system-ui, sans-serif;
+  text-align: justify;
+}
+.socials {
+  gap: 14px;
+}
+.socialBtn {
+  display: inline-block;
+  padding: 0;
+  width: auto;
+  height: auto;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.socialBtn:hover {
+  transform: translateY(-2px);
+}
+.socialBtn img {
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+  filter: none;
+}
+
+/* -------- Links area -------- */
+/* Let Bootstrap's .row/.col manage columns */
+.links {
+  width: 100%;
+}
+
+.col h4 {
+  margin: 4px 0 10px;
+  color: #9fc9ff;
+  font: 800 14px/1 "DM Sans", system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.navItem,
+.contactLine {
+  display: block;
+  align-items: center;
+  gap: 10px;
+  color: #e7efff;
+  text-decoration: none;
+  font: 600 14.5px/1.6 "DM Sans", system-ui, sans-serif;
+  padding: 6px 0;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.navItem:hover {
+  color: #a7d1ff;
+  transform: translateX(4px);
+}
+
+.bullet {
+  display: none !important;
+}
+
+.contactLine {
+  color: #cfe5ff;
+}
+
+/* Quick Access vertical layout */
+.colQuick .quickRow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+.colQuick .navItem {
+  display: inline-flex;
+  padding: 4px 0;
+  text-decoration: none;
+  color: #e7efff;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.colQuick .navItem:hover {
+  color: #a7d1ff;
+  transform: translateY(-1px);
+}
+
+/* Contact rows with icons */
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+}
+.contactIcon {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  display: block;
+}
+.contactText {
+  color: #cfe5ff;
+  text-decoration: none;
+  font: 600 14.5px/1.6 "DM Sans", system-ui, sans-serif;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.contactText:hover {
+  color: #a7d1ff;
+}
+
+/* -------- Bottom bar -------- */
+.bottom {
+  width: 100%;
+  margin: 36px auto 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #b6d3ff;
+  font: 600 13.5px/1.4 "DM Sans", system-ui, sans-serif;
+}
+.scrollTop {
+  cursor: pointer;
+  color: #9ad0ff;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.scrollTop:hover {
+  transform: translateY(-2px);
+}
+
+/* Gloss sweep */
+.sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.07),
+    transparent
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.25;
+  animation: sweep 6s ease-in-out infinite;
+}
+@keyframes sweep {
+  0%,
+  100% {
+    transform: translateX(-30%);
+  }
+  50% {
+    transform: translateX(30%);
+  }
+}
+
+/* -------- Responsive tweaks -------- */
+@media (max-width: 560px) {
+  .footer {
+    padding: 72px 18px 28px;
+  }
+  .colQuick .quickRow {
+    gap: 8px 12px;
+  }
+}
+
+/* keep this from older file */
+.bullet {
+  display: none !important;
+}

@@ -1,0 +1,304 @@
+/* ================================ 
+   HERO (industries)
+   ================================ */
+.industriesHero {
+  width: 100%;
+  height: 720px !important;      /* desktop default */
+  aspect-ratio: 2/1;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0 24px;               /* small horizontal breathing on all sizes */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+/* title wrapper (keep clamp) */
+.industriesTitle {
+  height: auto;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;         /* max 3 lines */
+  overflow: hidden;
+
+  line-clamp: 3;
+  text-align: center;
+  margin-bottom: 20px !important;
+}
+
+/* title parts */
+.whiteText,
+.blueText {
+  font-family: "DM Sans";
+  font-weight: 700;
+  font-style: normal;
+  font-size: clamp(28px, 6.5vw, 96px);
+  line-height: clamp(36px, 6.8vw, 100px);
+  display: inline;
+  white-space: normal;
+  word-break: break-word;        /* avoid overflow on tiny phones */
+}
+.whiteText { color: #fff !important; }
+.blueText {
+  background: linear-gradient(90deg, #3d7cff 0%, #63e3ff 60%, #3d7cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* description */
+.industriesDescription {
+  width: 100%;
+  max-width: 70ch;
+  color: #fff;
+  font-family: "DM Sans";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 30px;
+  margin: 0 auto;
+  text-overflow: clip;
+  padding: 0 8px;
+}
+
+/* ================================
+   PAGE WRAPPER
+   ================================ */
+.wrapper {
+  width: 100%;
+  max-width: 1280px;
+  margin: 80px auto 0;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.heading {
+  color: #000;
+  text-align: center;
+  font-family: "DM Sans";
+  font-weight: 700;
+  font-size: clamp(22px, 5vw, 60px);
+  line-height: 1.15;
+  margin: 0 auto;
+  padding: 0;
+  background: linear-gradient(90deg, #1b2a5b 20%, #3d7cff 45%, #63e3ff 70%, #1b2a5b 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 0.6s ease;
+}
+
+.content {
+  color: #000;
+  text-align: justify;
+  font-family: "DM Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px;
+  margin: 0 auto;
+  padding: 0;
+}
+.content p { margin-bottom: 24px; 
+text-align: justify;}
+
+/* ================================
+   CARD GRID (2×2)
+   ================================ */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+
+  width: min(100%, 700px);  /* centers nicely on large screens */
+  margin: 0 auto 50px;
+
+  justify-items: stretch;
+  align-items: stretch;
+}
+
+/* ===== Card (glassy white) ===== */
+.card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.88));
+  border: 1px solid rgba(110, 168, 255, 0.22);
+  border-radius: 28px;
+  color: #132238;
+
+  width: 100%;
+  max-width: 320px;              /* nice readable width on desktop */
+  min-height: 260px;
+  padding: 28px 22px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  box-shadow: 0 10px 24px rgba(20, 40, 80, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: transform 0.18s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  overflow: hidden;
+}
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 49%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(60% 60% at 50% 50%, rgba(110, 168, 255, 0.22), rgba(51, 210, 255, 0.16) 60%, transparent 70%);
+  filter: blur(12px);
+  pointer-events: none;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(110, 168, 255, 0.38);
+  box-shadow: 0 16px 36px rgba(20, 40, 80, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* card text helpers */
+.cardTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a2b4b;
+  text-align: center;
+}
+.cardText {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #3a536f;
+  text-align: center;
+}
+.cardList {
+  margin: 0;
+  padding-left: 18px;
+  align-self: stretch;
+  color: #3a536f;
+  line-height: 1.6;
+  font-size: 14.5px;
+}
+
+/* fallback if you render h3/p inside .card */
+.card h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a2b4b;
+  margin: 0;
+}
+.card p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #3a536f;
+  margin: 0;
+}
+
+/* Make Next/Image inside card scale nicely */
+.card > span { width: 100% !important; display: block; }
+.card > span img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain;
+  max-height: 200px;
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+/* Large desktops – keep hero tall */
+@media (min-width: 1441px) {
+  .industriesHero { height: 720px !important; }
+}
+
+/* Laptops / small desktops */
+@media (max-width: 1280px) {
+  .industriesHero { height: 600px !important; }
+}
+
+/* Tablets landscape / small laptops */
+@media (max-width: 1024px) {
+  .industriesHero { height: 520px !important; padding: 0 20px; }
+  .industriesDescription { max-width: 80ch; font-size: 15px; line-height: 28px; }
+  .cardGrid { gap: 28px; width: min(100%, 760px); }
+}
+
+/* Tablets portrait */
+@media (max-width: 900px) {
+  .industriesHero { height: 480px !important; }
+  .cardGrid {
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    padding: 0 8px;
+  }
+  .card { max-width: 100%; }
+}
+
+/* Mobile – stack, tighten spacings, shrink hero */
+@media (max-width: 768px) {
+  .industriesHero {
+    height: 420px !important;
+    aspect-ratio: auto;
+    padding: 0 16px;
+  }
+  .industriesTitle { -webkit-line-clamp: 3; line-clamp: 3; }
+  .industriesDescription {
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0 8px;
+  }
+
+  .heading { font-size: 28px; line-height: 1.3; }
+  .content { font-size: 14px; line-height: 24px; text-align: left; }
+
+  .cardGrid {
+    grid-template-columns: 1fr;   /* one per row */
+    width: 100%;
+    gap: 18px;
+    padding: 0 8px;
+  }
+  .card {
+    max-width: 100%;
+    border-radius: 24px;
+    padding: 24px 18px;
+    min-height: 220px;
+  }
+  .card > span img { max-height: 180px; }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .industriesHero { height: 380px !important; padding: 0 12px; }
+  .heading { font-size: 22px; padding: 0 10px; }
+  .content { font-size: 13px; line-height: 22px; padding: 0 10px; }
+  .card { padding: 20px 16px; border-radius: 20px; }
+  .card > span img { max-height: 160px; }
+}
+
+/* Tiny phones */
+@media (max-width: 360px) {
+  .industriesHero { height: 340px !important; }
+  .whiteText, .blueText {
+    font-size: clamp(22px, 8vw, 28px);
+    line-height: clamp(28px, 8.5vw, 36px);
+  }
+  .industriesDescription { font-size: 13px; line-height: 20px; }
+}

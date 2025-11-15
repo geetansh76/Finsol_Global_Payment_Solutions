@@ -1,0 +1,299 @@
+/* sensible box model everywhere */
+.tcContainer,
+.tcContainer *,
+.shortHero,
+.customTitle {
+  box-sizing: border-box;
+}
+
+/* ---------- Hero / Title ---------- */
+.shortHero {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Fluid, no fixed height so it can shrink on phones */
+.customTitle {
+  max-width: 100%;
+  margin-top: -20px !important;
+  letter-spacing: 0;
+  text-align: center;
+  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif;
+  font-size: clamp(32px, 8vw, 96px);
+  font-weight: 700;
+  line-height: 1.1;
+  background: linear-gradient(90deg, #3d7cff 0%, #63e3ff 60%, #3d7cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline;
+  text-wrap: balance;
+}
+
+/* ---------- Terms page main area ---------- */
+.tcContainer {
+  display: flex;
+  width: 100%;
+  max-width: 1340px;
+  margin: 80px auto;
+  padding: 0 24px;
+  gap: 48px;
+}
+
+/* Sidebar */
+.tcSidebar {
+  flex: 0 0 300px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 96px;
+  align-self: flex-start;
+}
+
+.sidebarTitle {
+  margin: 0 0 12px 2px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.menu li {
+  margin: 10px 0;
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  padding: 2px 0;
+  text-decoration: none;
+  transition: color 0.15s ease, background 0.15s ease;
+  color: #0b1530;
+  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 20px;
+}
+.link:hover,
+.link:focus-visible {
+  color: #2f4db0;
+  background: #eef2ff;
+  outline: 0;
+}
+
+.active {
+  position: relative;
+  padding-left: 12px;
+  color: #1a70a6;
+}
+.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: #2f4db0;
+  border-radius: 2px;
+}
+
+/* ---------- Content column ---------- */
+.tcContent {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.intro {
+  margin: 0 0 18px;
+  color: #374151;
+  line-height: clamp(22px, 3.2vw, 26px);
+  font-size: clamp(14px, 1.9vw, 16px);
+}
+
+/* section block wrapper */
+.block {
+  margin: 0 0 20px;
+  padding: 6px 0;
+  scroll-margin-top: 96px;
+  border-top: 1px solid #eef2ff;
+}
+
+/* ---------- Headings ---------- */
+.h2 {
+  color: #29236e; /* fallback */
+  --g1: #0d1b3d;
+  --g2: #103a73;
+  --g3: #185ab0;
+  --g4: #0b8a86;
+  background: linear-gradient(
+    90deg,
+    var(--g1) 0%,
+    var(--g2) 35%,
+    var(--g3) 65%,
+    var(--g4) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif;
+  font-size: clamp(22px, 4.2vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 10px;
+}
+.h2Dark {
+  --g1: #0b1224;
+  --g2: #0e2a5a;
+  --g3: #144ad1;
+  --g4: #0a8a88;
+}
+
+/* body text */
+.tcContent p,
+.tcContent li {
+  color: #000;
+  font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif;
+  font-size: clamp(14px, 1.9vw, 16px);
+  font-weight: 600;
+  line-height: clamp(22px, 4.2vw, 30px);
+  margin: 8px 0;
+  text-align: justify;
+}
+
+.tcContent ul {
+  margin: 8px 0 12px 20px;
+  padding: 0;
+  list-style: disc;
+}
+.tcContent ul li {
+  margin: 6px 0;
+}
+
+/* Links inside content */
+.tcContent a {
+  color: #0f58b6;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(15, 88, 182, 0.25);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.tcContent a:hover,
+.tcContent a:focus-visible {
+  color: #0a3f86;
+  border-color: rgba(10, 63, 134, 0.55);
+  outline: 0;
+}
+
+/* ================================
+   Responsive
+   ================================ */
+
+/* <= 1200px: soften outer margins */
+@media (max-width: 1200px) {
+  .tcContainer {
+    margin: 64px auto;
+  }
+}
+
+/* <= 1024px: narrow the gap a bit */
+@media (max-width: 1024px) {
+  .tcContainer {
+    gap: 32px;
+  }
+  .customTitle {
+    margin-top: -10px !important;
+  }
+}
+
+/* <= 900px: stack layout (sidebar above content) and unstick sidebar */
+@media (max-width: 900px) {
+  .tcContainer {
+    flex-direction: column;
+    gap: 24px;
+    margin: 56px auto;
+  }
+  .tcSidebar {
+    width: 100%;
+    max-width: 100%;
+    position: static;
+    top: auto;
+  }
+  /* when sidebar isn't sticky, reduce anchor offset */
+  .block {
+    scroll-margin-top: 24px;
+  }
+}
+
+/* <= 768px: two-column grid for the sidebar menu; shrink title spacing */
+@media (max-width: 768px) {
+  .shortHero {
+    min-height: 70vh;
+  }
+  .customTitle {
+    margin-top: 0 !important;
+  }
+  .menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 16px;
+  }
+  .menu li {
+    margin: 0;
+  }
+  .link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 12px;
+    margin-bottom: 0;
+    font-size: 18px;
+    background: #f8f9fb;
+    border-radius: 8px;
+  }
+  .active {
+    background: #eef6ff;
+    color: #1a70a6;
+  }
+  .active::before {
+    display: none;
+  }
+}
+
+/* <= 560px: slightly tighter container margins */
+@media (max-width: 560px) {
+  .tcContainer {
+    margin: 48px auto;
+    padding: 0 16px;
+  }
+}
+
+/* <= 480px: single column for tiny phones */
+@media (max-width: 480px) {
+  .menu {
+    grid-template-columns: 1fr;
+  }
+  .link {
+    text-align: left;
+    font-size: 16px;
+  }
+  .tcContainer {
+    margin: 40px auto;
+  }
+}
+
+
+

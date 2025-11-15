@@ -1,0 +1,109 @@
+/* solutions.module.css */
+
+.titleOverride {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 72px auto;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+
+  /* Fluid typography from small phones to large desktop */
+  font-size: clamp(32px, 7.5vw, 90px);
+  line-height: 1.1;
+  text-align: center;
+}
+
+.splitTitle {
+  display: block;
+}
+
+.splitTitle > div {
+  display: block; /* force each to its own row */
+}
+.secondLine {
+  white-space: nowrap; /* keeps second line together on wide screens */
+}
+
+.descriptionOverride {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.6;
+  font-weight: 600;
+  opacity: 0.95;
+  text-align: center;
+  padding: 0 16px; /* breathing room on small screens */
+}
+
+/* ------------------- */
+/* RESPONSIVE QUERIES  */
+/* ------------------- */
+
+/* Tablets / small laptops */
+@media (max-width: 1024px) {
+  .titleOverride {
+    margin-bottom: 48px;
+  }
+  .secondLine {
+    white-space: normal;
+  } /* allow wrap if needed */
+}
+
+/* General smartphones */
+@media (max-width: 640px) {
+  .titleOverride {
+    margin-bottom: 32px;
+  }
+  .descriptionOverride {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+/* Mid-size phones: iPhone XR/13 mini, many Androids (≤414px) */
+@media (max-width: 414px) {
+  .titleOverride {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+  .descriptionOverride {
+    font-size: 13px;
+    padding: 0 12px;
+  }
+}
+
+/* Small phones: iPhone SE + older compacts (≤375px) */
+@media (max-width: 375px) {
+  .titleOverride {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  .descriptionOverride {
+    font-size: 12px;
+    line-height: 1.4;
+    padding: 0 10px;
+  }
+}
+
+/* Extra small safety net (older/zoomed UIs, ≤320px) */
+@media (max-width: 320px) {
+  .titleOverride {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .descriptionOverride {
+    font-size: 12px;
+    padding: 0 8px;
+  }
+}
+
+/* Optional: reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .titleOverride,
+  .descriptionOverride,
+  .splitTitle,
+  .secondLine {
+    animation: none !important;
+    transition: none !important;
+  }
+}

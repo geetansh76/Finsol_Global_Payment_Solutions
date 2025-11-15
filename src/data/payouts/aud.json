@@ -1,0 +1,172 @@
+{
+  "meta": { "title": "Payouts", "currency": "AUD" },
+
+  "lead": "Leverage powerful APIs to automate global disbursements, enabling developers to build fast, reliable payout solutions that scale effortlessly across markets.",
+
+  "overview": "This document provides a comprehensive guide for integrating with the Finsol Payout (Withdrawal) S2S API. It covers the purpose, endpoints, authentication methods, data encryption, and usage guidelines to enable you to make secure payout requests, check balances, and verify transaction statuses.",
+
+  "prerequisites": [
+    "Merchant ID (mid)",
+    "Salt Key",
+    "Secret Key",
+    "Your server’s IP address must be allowlisted."
+  ],
+
+  "urls": {
+    "test": "https://spayout.finsol.group/",
+    "production": "https://payout.finsol.group"
+  },
+
+  "endpoints": [
+    { "path": "/v3/pay-request", "method": "POST", "description": "Initiate a payout to a beneficiary" },
+    { "path": "/v3/get-balance", "method": "POST", "description": "Check your available account balance" },
+    { "path": "/v3/get-status",  "method": "POST", "description": "Check the status of a specific transaction" }
+  ],
+
+  "parameters": [
+    {
+      "title": "Main Request Parameters",
+      "columns": ["Parameter","Data Type","Description","Min/Max Value","Required"],
+      "rows": [
+        { "Parameter": "amount",      "Data Type": "Number", "Description": "Amount to transfer",                                  "Min/Max Value": "2–10",  "Required": "Yes" },
+        { "Parameter": "currency",    "Data Type": "String", "Description": "ISO 4217 currency code (e.g., AUD)",                  "Min/Max Value": "3",     "Required": "Yes" },
+        { "Parameter": "order_id",    "Data Type": "String", "Description": "Your unique transaction ID",                          "Min/Max Value": "Up to 20", "Required": "Yes" },
+        { "Parameter": "pay_mode",    "Data Type": "String", "Description": "Payment method (e.g., AUAT)",                         "Min/Max Value": "2–4",   "Required": "Yes" },
+        { "Parameter": "sub_pay_mode","Data Type": "String", "Description": "Sub-payment method (e.g., BSB)",                      "Min/Max Value": "2–4",   "Required": "Yes" },
+        { "Parameter": "merchant_id", "Data Type": "String", "Description": "Your Finsol Merchant ID",                             "Min/Max Value": "15–18", "Required": "Yes" },
+        { "Parameter": "salt",        "Data Type": "String", "Description": "Your Salt (from the dashboard)",                      "Min/Max Value": "18–20", "Required": "Yes" },
+        { "Parameter": "beneficiary", "Data Type": "Object", "Description": "Contains beneficiary details",                         "Min/Max Value": "—",     "Required": "Yes" }
+      ]
+    },
+    {
+      "title": "Beneficiary Object Parameters",
+      "columns": ["Parameter","Data Type","Description","Min/Max Value","Required"],
+      "rows": [
+        { "Parameter":"bank_acc_no","Data Type":"String","Description":"Beneficiary’s bank account number","Min/Max Value":"6–20","Required":"Yes" },
+        { "Parameter":"name","Data Type":"String","Description":"Beneficiary’s full name","Min/Max Value":"Up to 50","Required":"Yes" },
+        { "Parameter":"bank_name","Data Type":"String","Description":"Name of the beneficiary’s bank","Min/Max Value":"5–50","Required":"Yes" },
+        { "Parameter":"bank_code","Data Type":"String","Description":"Beneficiary bank code (e.g., BSB)","Min/Max Value":"2–20","Required":"Yes" },
+        { "Parameter":"mobile","Data Type":"Number","Description":"Beneficiary mobile number (with country code, no +)","Min/Max Value":"8–13","Required":"Yes" },
+        { "Parameter":"email","Data Type":"String","Description":"Beneficiary email address","Min/Max Value":"5–50","Required":"Yes" },
+        { "Parameter":"country","Data Type":"String","Description":"Beneficiary country","Min/Max Value":"5–50","Required":"Yes" },
+        { "Parameter":"address","Data Type":"Object","Description":"Beneficiary street address","Min/Max Value":"5–100","Required":"Yes" },
+        { "Parameter":"city","Data Type":"String","Description":"Beneficiary city","Min/Max Value":"5–50","Required":"Yes" },
+        { "Parameter":"state","Data Type":"Object","Description":"Beneficiary state","Min/Max Value":"5–50","Required":"Yes" },
+        { "Parameter":"pincode","Data Type":"String","Description":"ZIP or postal code","Min/Max Value":"4–10","Required":"Yes" }
+      ]
+    }
+  ],
+
+  "payments": {
+    "encryption": {
+      "heading": "Encryption & Decryption",
+      "lead": "All sensitive data in requests and responses must be encrypted/decrypted using AES-256-CBC.",
+      "steps": ["Create a Request Object: Form a JSON object with the required parameters (e.g., for /v3/pay-request)."],
+      "requestExampleJson": {
+        "amount": "10.00",
+        "currency": "AUD",
+        "order_id": "8783193",
+        "pay_mode": "AUAT",
+        "sub_pay_mode": "BSB",
+        "merchant_id": "UMZ0VEHTT03DH",
+        "beneficiary": {
+          "bank_acc_no": "083028",
+          "name": "TestTest",
+          "email": "test@test.com",
+          "mobile": "610430467999",
+          "address": "55street99",
+          "city": "SouthManhaten",
+          "pincode": "1234",
+          "bsb": "987654321",
+          "state": "MyState",
+          "country": "AUS"
+        }
+      },
+      "stringifyExample": "encrypt_str={\"amount\":\"10.00\"~\"currency\":\"AUD\"~\"order_id\":\"8783193\"~\"pay_mode\":\"AUAT\"~\"sub_pay_mode\":\"BSB\"~\"merchant_id\":\"UMZ0VEHTT03DH\"~\"beneficiary\":{ \"bank_acc_no\":\"083028\",\"name\":\"Test Test\",\"email\":\"test@test.com\",\"mobile\":\"610430467999\",\"address\":\"55 street 99\",\"city\":\"South Manhaten\",\"pincode\":\"1234\",\"bsb\":\"987654321\",\"state\":\"My State\",\"country\":\"AUS\"}}",
+      "opensslExampleEncrypt": "openssl enc -aes-256-cbc -in plaintext.txt -out encrypted_data.bin -K [YOUR_32_CHAR_KEY] -iv [YOUR_16_CHAR_IV]",
+      "finalRequestJson": { "mid": "iA************zo", "data": "FEZQmxMXriEFA5Og..." },
+      "exampleJson": { "mid": "iA************zo", "data": "fMrCfhtikCMj5SY3+HyH..." },
+      "decryptNotes": [
+        "IV: first 16 chars of Secret Key",
+        "Key: next 32 chars of Secret Key",
+        "Decrypt with AES-256-CBC"
+      ],
+      "opensslExampleDecrypt": "openssl enc -d -aes-256-cbc -in encrypted_data.txt -out decrypted_data.txt -K <key> -iv <iv>"
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    "initiatePayout": {
+      "title": "Initiate a Payout (/v3/pay-request)",
+      "steps": [
+        "Create the Beneficiary Object",
+        "Follow the Encryption Steps (3.1) to encrypt this entire JSON object.",
+        "Send the encrypted payload in a POST request to {baseUrl}/v3/pay-request."
+      ],
+      "sampleDecryptedResponseJson": {
+        "status": "Success",
+        "data": {
+          "status": "Accepted",
+          "status_code": "0000",
+          "amount": "19.66",
+          "txn_id": "UA24/3232583M-00165",
+          "merchant_id": "UM207EHIT23FAH",
+          "order_id": "6785183",
+          "remarks": "Request Accepted"
+        }
+      }
+    },
+
+    "checkBalance": {
+      "title": "Check Balance (/v3/get-balance)",
+      "examples": [
+        { "label": "Encrypt the below request", "json": { "salt": "9ZRoJDkqzS6oLg5GqhfP2TamQgb2wbs" } },
+        { "label": "Create Request Object", "json": { "mid": "UM********6LT", "data": "KdmMZgUz...Qx" } },
+        { "label": "Hash", "json": { "mid": "is3V68VJ5F8IR", "txn_id": "UA25032801041423", "hash": "48DJ2D9JSTDF06PFJDSJ49..." } }
+      ],
+      "responseJson": {
+        "status": "Success",
+        "remarks": "Success",
+        "data": { "currencyCode": "AUD", "amount": "9800.0", "hash": "57043740..." }
+      }
+    },
+
+    "checkStatus": {
+      "title": "Check Transaction Status (/v3/get-status)",
+      "requestJson": { "salt": "YOUR_SALT_KEY", "txn_id": "FINSOL_TRANSACTION_ID_TO_QUERY" },
+      "responseJson": {
+        "status": "Failed",
+        "status_code": "4444",
+        "amount": "746",
+        "txn_id": "LA25032712562246IB77",
+        "order_id": "ORD-250327125550-660DIA",
+        "remarks": "Failed at Bank End",
+        "hash": "08481354..."
+      }
+    }
+  },
+
+  "appendix": {
+    "paymentMethods": [
+      { "currency": "AUD", "method": "BSB", "paymode": "AUAT", "subpaymode": "BSB" }
+    ],
+    "statusCodes": [
+      { "Status Name": "Accepted", "Status Code": "0000", "Remarks": "Request Accepted" },
+      { "Status Name": "Success",  "Status Code": "1111", "Remarks": "Payment Successful" },
+      { "Status Name": "Pending",  "Status Code": "2222", "Remarks": "Payment Under Processing" },
+      { "Status Name": "Rejected", "Status Code": "3333", "Remarks": "Request Rejected" },
+      { "Status Name": "Failed",   "Status Code": "4444", "Remarks": "Failed at Bank End" },
+      { "Status Name": "Reversed", "Status Code": "1010", "Remarks": "Payment Reversed" }
+    ]
+  }
+}

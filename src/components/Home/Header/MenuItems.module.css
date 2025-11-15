@@ -1,0 +1,396 @@
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 22px;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+}
+
+.menu li a,
+.link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16.5px;
+  font-weight: 600;
+  border-radius: 8px;
+  outline: none;
+  transition: opacity 0.15s ease;
+  opacity: 0.95;
+}
+.menu li a:hover,
+.menu li a:focus-visible,
+.link:hover,
+.link:focus-visible {
+  opacity: 1;
+}
+
+/* animated underline */
+.menu li a::after,
+.link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 70%;
+  height: 2px;
+  background: linear-gradient(90deg, #7ac1ff, #33d2ff);
+  border-radius: 2px;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform 0.22s ease;
+}
+.menu li a:hover::after,
+.menu li a:focus-visible::after,
+.link:hover::after,
+.link:focus-visible::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+
+
+.menu li a.active {
+  opacity: 1;
+}
+.menu li a.active::after {
+  transform: translateX(-50%) scaleX(1);
+  height: 3px;
+}
+
+
+/* dropdown wrapper */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  overflow: visible;
+}
+
+/* keep hover alive when moving to panel (desktop only) */
+@media (min-width: 1201px) {
+  .dropdown::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 14px;
+    pointer-events: none;
+  }
+}
+
+/* panel (desktop) */
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  min-width: 280px;
+  max-width: 680px;
+  max-height: min(72vh, 520px);
+  overflow: auto;
+  background: linear-gradient(180deg, #f7fbff 0%, #eef6ff 60%, #eaf5ff 100%);
+  border: 1px solid #61656b;
+  border-radius: 14px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  -webkit-backdrop-filter: saturate(120%) blur(6px);
+  backdrop-filter: saturate(120%) blur(6px);
+  padding: 10px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.18s ease, transform 0.18s ease,
+    visibility 0s linear 0.18s;
+}
+.dropdown:hover > .dropdownMenu,
+.dropdown:focus-within > .dropdownMenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s, 0s, 0s;
+}
+.dropdownMenu li {
+  margin: 0;
+  padding: 0;
+}
+.dropdownMenu li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  color: black;
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.5;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.12s ease, color 0.12s ease;
+  outline: none;
+}
+
+.dropdownMenu li a:hover,
+.dropdownMenu li a:focus-visible {
+  background: #f2f7ff;
+  color: #422ccc;
+}
+
+/* subtle slide-in on open (desktop) */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.dropdown:hover > .dropdownMenu li,
+.dropdown:focus-within > .dropdownMenu li {
+  animation: riseIn 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.dropdown:hover > .dropdownMenu li:nth-child(1) {
+  animation-delay: 20ms;
+}
+.dropdown:hover > .dropdownMenu li:nth-child(2) {
+  animation-delay: 60ms;
+}
+.dropdown:hover > .dropdownMenu li:nth-child(3) {
+  animation-delay: 100ms;
+}
+
+/* coverage mega menu (desktop) */
+.coverageDropdown {
+  position: absolute;
+  left: 50%;
+  width: clamp(780px, 72vw, 980px);
+  min-width: 720px;
+  max-width: 1000px;
+  transform: translate(-50%, -8px);
+  overflow: visible;
+  z-index: 2000;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  column-gap: 28px;
+  padding: 16px 18px;
+}
+.dropdown:hover > .coverageDropdown,
+.dropdown:focus-within > .coverageDropdown {
+  transform: translate(-50%, 0);
+}
+
+.continentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 12px;
+  margin: 0;
+  border-right: 1px dashed rgba(2, 6, 23, 0.12);
+}
+.continentName {
+  display: block;
+  padding: 10px 12px;
+  color: #0f172a;
+  font-weight: 800;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.continentName:hover,
+.continentName:focus-visible {
+  background: #eef5ff;
+  color: #1246d6;
+}
+.activeContinent {
+  background: #eef5ff;
+  color: #1246d6;
+}
+
+.countriesList {
+  max-height: min(70vh, 520px);
+  overflow: auto;
+  padding-right: 10px;
+  min-width: 480px;
+}
+.twoColumnsWrapper {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  column-gap: 24px;
+  row-gap: 8px;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.countryItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  color: #0f172a;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.12s ease, color 0.12s ease;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+.countryItem:hover,
+.countryItem:focus-visible {
+  background: #f2f7ff;
+  color: #1246d6 !important;
+}
+.flagIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+.countriesList::-webkit-scrollbar {
+  width: 8px;
+}
+.countriesList::-webkit-scrollbar-thumb {
+  background: rgba(2, 6, 23, 0.18);
+  border-radius: 999px;
+}
+
+/* ---------------------------
+   MOBILE (≤1200px)
+   – stack items
+   – dropdowns closed by default
+   – open only when <li> has .open
+   --------------------------- */
+@media (max-width: 1200px) {
+  .menu li a,
+.link {
+  font-size: 13.5px;
+}
+  .menu {
+    gap: 7px;
+  }
+  .MenuItems_menu__IsqHm {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* Remove desktop underline effect inside stacked nav */
+  .menu li a::after,
+  .link::after {
+    display: none;
+  }
+
+  /* hide panels until open */
+  .dropdownMenu {
+    position: static;
+    display: none; /* closed by default */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 6px 0 0;
+    max-height: none;
+    min-width: 0;
+    max-width: none;
+    overflow: visible;
+  }
+
+  /* when the parent li gets .open from React, show it */
+  .open > .dropdownMenu {
+    display: block;
+  }
+
+  /* rotate caret if open */
+  .open > .link > .arrowIcon,
+  .open .arrowIcon {
+    transform: rotate(180deg);
+  }
+
+  /* collapse coverage to single column */
+  .coverageDropdown {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    padding: 6px 0 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+  .twoColumnsWrapper {
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (max-width: 992px) {
+  .dropdown:hover > .coverageDropdown,
+  .dropdown:focus-within > .coverageDropdown {
+    transform: translate(0%, 0) !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Force white links on tablets & phones */
+@media (max-width: 1200px) {
+  .menu li a,
+  .link {
+    color: #fff !important;
+  }
+  /* keep hover/focus white too */
+  .menu li a:hover,
+  .menu li a:focus-visible,
+  .link:hover,
+  .link:focus-visible {
+    color: #fff !important;
+  }
+  /* caret uses currentColor; ensure it’s white */
+  .arrowIcon {
+    color: #fff !important;
+  }
+}
+
+/* (optional) extra safety for smaller phones */
+@media (max-width: 768px) {
+  .menu li a,
+  .link,
+  .menu li a:hover,
+  .menu li a:focus-visible,
+  .link:hover,
+  .link:focus-visible,
+  .arrowIcon {
+    color: #fff !important;
+  }
+}
+
+
+@media (max-width: 1200px) {
+  .continentName,
+  .activeContinent,
+  .continentName:hover,
+  .continentName:focus-visible {
+    background: transparent !important;
+  }
+
+  .countryItem:hover,
+  .countryItem:focus-visible {
+    background: transparent !important;
+  }
+
+}

@@ -1,0 +1,76 @@
+/* ===== About header container ===== */
+.aboutHeader {
+  width: 100%;
+  /* Scale height sensibly across devices instead of hard 100vh */
+  min-height: clamp(520px, 82svh, 880px);
+  padding: clamp(24px, 6vw, 72px) clamp(16px, 5vw, 48px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;            /* keep everything centered */
+  position: relative;
+  overflow: hidden;
+
+  /* iOS safe areas */
+  padding-top: calc(env(safe-area-inset-top) + clamp(16px, 3vw, 32px));
+}
+
+/* ===== Title (responsive gradient) ===== */
+.aboutTitle {
+  /* size: phone → tablet → desktop */
+  font-size: clamp(32px, 6.5vw, 82px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+
+  /* finsol gradient text */
+  background: linear-gradient(90deg, #3d7cff 0%, #63e3ff 60%, #3d7cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  /* better wrapping behavior on small screens */
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  margin: 0 0 clamp(8px, 1.6vw, 14px);
+}
+
+/* ===== Description (scales + readable width) ===== */
+.aboutDescription {
+  margin: 0 auto;
+  max-width: min(70ch, 92vw);
+  opacity: 0.92;
+  line-height: 1.6;
+  font-size: clamp(14px, 2.1vw, 18px);
+  color: #ffffff;
+  text-align: center;
+}
+
+/* ===== Helpful breakpoints ===== */
+@media (min-width: 768px) {
+  .aboutHeader {
+    padding: clamp(40px, 7vw, 96px) clamp(24px, 6vw, 72px);
+  }
+  .aboutTitle {
+    letter-spacing: -0.015em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .aboutTitle {
+    font-size: clamp(56px, 5.2vw, 96px); /* allow bigger on wide screens */
+  }
+  .aboutDescription {
+    font-size: clamp(15px, 1.3vw, 20px);
+  }
+}
+
+/* Motion safety for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .aboutHeader, .aboutTitle, .aboutDescription {
+    transition: none !important;
+    animation: none !important;
+  }
+}

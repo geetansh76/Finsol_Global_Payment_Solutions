@@ -1,0 +1,234 @@
+.heroHeader {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+/* wrap is just to scope spacing if you need extra tweaks later */
+.titleWrap {
+  max-width: 1440px;
+  margin: 0 0;
+}
+
+.titleWrap {
+  text-align: center;
+  padding: 24px 16px 8px;
+}
+
+.heroTitle {
+  margin: 0;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-weight: 900;
+  line-height: 1.05;
+  font-size: clamp(34px, 5.5vw, 60px);
+  color: #0c1630;
+}
+
+.titlePrimary {
+
+  color: #f1f5f9 !important;
+  font-weight: 700;
+  font-size: 96px;
+}
+
+.titleAccent {
+  background: linear-gradient(90deg, #3d7cff 0%, #63e3ff 60%, #3d7cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  color: #3b82f6; /* accent blue */
+  font-weight: 800;
+  font-size: 94px;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  margin: 10px auto 0;
+  max-width: 880px;
+  color: white !important;
+  font: 600 16px/26px "DM Sans", system-ui, sans-serif;
+  opacity: 0.9;
+}
+
+
+
+/* basic responsiveness so the huge sizes don’t overflow on smaller screens */
+@media (max-width: 1200px) {
+  .titlePrimary,
+  .titleAccent {
+    font-size: 72px;
+  }
+}
+@media (max-width: 768px) {
+  .heroHeader {
+    padding: 3rem 1.25rem;
+  }
+  .titlePrimary,
+  .titleAccent {
+    font-size: 48px;
+  }
+  .subtitle {
+    font-size: 13.5px;
+    line-height: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .titlePrimary,
+  .titleAccent {
+    font-size: 38px;
+  }
+}
+
+
+/* ===== Page wrapper: center all rows ===== */
+.page {
+  /* center the rows and keep the gap between them */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  margin: 28px auto 64px;
+}
+
+/* ===== Card row (fixed desktop size) ===== */
+.card {
+  /* desktop fixed size */
+  --row-w: 1440px;
+  --row-h: 500px;
+
+  width: min(var(--row-w), 100%);
+  height: var(--row-h);
+
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr; /* text | image */
+  align-items: center;
+  gap: 40px; /* as requested */
+  padding: 0 80px; /* as requested */
+
+}
+
+/* Alternate layout (image left, text right) */
+.reverse {
+  grid-template-columns: 0.85fr 1.15fr;
+}
+.reverse .content {
+  order: 2;
+}
+.reverse .imageWrap {
+  order: 1;
+}
+
+/* ===== Text block ===== */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 640px; /* keeps paragraphs optimal width */
+}
+
+.cardTitle {
+  display: inline-block;
+  width: 100%;
+  height: 78px;
+  font-family: "DM Sans";
+  font-size: 58px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+    background: linear-gradient(90deg, #0d1b3d 0%, #103a73 35%, #185ab0 65%, #0b8a86 100%);
+  -webkit-background-clip: text;   /* Chrome/Safari/iOS */
+  background-clip: text;           /* Firefox/modern */
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.cardBlurb {
+  margin: 0;
+  font: 600 14.5px/24px "DM Sans", system-ui, sans-serif;
+  opacity: 0.7;
+  text-align: justify;
+  color: var(--Black, #070707);
+  text-align: justify;
+  /* B1(Primary) */
+  font-family: "DM Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px; /* 187.5% */
+}
+
+.cta {
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+ 
+  font: 800 14.5px/1 "DM Sans", system-ui, sans-serif;
+  text-decoration: none;
+  font-size: 20px;
+      color: #008cff;
+      height: 50px;
+  transition: transform 0.15s ease, box-shadow 0.25s ease, filter 0.15s ease;
+  display: flex;
+  padding: 10px 0px;
+  align-items: center;
+  gap: 5px;
+}
+.cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(15, 88, 182, 0.18);
+  filter: brightness(1.03);
+  padding: 10px 10px;
+
+}
+
+/* ===== Image side ===== */
+.imageWrap {
+  position: relative;
+  width: 100%;
+  height: 400px; /* balanced inside 580px row height */
+  border-radius: 12px;
+  overflow: hidden;
+  background: #eff6ff;
+  border: 1px solid #e6eef9;
+  box-shadow: 0 10px 22px rgba(8, 27, 51, 0.08) inset,
+    0 8px 18px rgba(8, 27, 51, 0.06);
+  justify-self: stretch;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.35s ease;
+}
+.imageWrap:hover .image {
+  transform: scale(1.025);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1480px) {
+  /* keep the row inside viewport with side breathing room */
+  .card {
+    width: min(1440px, 96vw);
+  }
+}
+
+@media (max-width: 900px) {
+  /* stack vertically on small screens */
+  .card,
+  .reverse {
+    grid-template-columns: 1fr;
+    height: auto; /* let it grow */
+    padding: 18px; /* friendlier padding on mobile */
+  }
+
+  .content {
+    order: 2;
+    max-width: none;
+  }
+  .imageWrap {
+    order: 1;
+    height: 220px;
+  }
+}

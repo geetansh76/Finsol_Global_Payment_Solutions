@@ -1,0 +1,36 @@
+/* Full-screen overlay container */
+.preloaderRoot {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  /* Light subtle gradient */
+  background: linear-gradient(135deg, #f7faff 0%, #eef3ff 50%, #f7faff 100%);
+  z-index: 999999;            /* above everything */
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .18s ease, visibility .18s ease;
+}
+
+/* Inner box (optional, just for layout) */
+.preloaderBox {
+  display: grid;
+  place-items: center;
+}
+
+/* Simple rotation animation for the image */
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  animation: rotate .8s linear infinite;
+  transform-origin: center center;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Hide helper (for future if needed) */
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
